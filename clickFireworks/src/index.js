@@ -4,6 +4,20 @@ import './styles/main.css';
 const canvas = document.getElementById('drawCanvas');
 const context = canvas.getContext('2d');
 
+function writeInstruction(canvas, canvasContext) {
+  canvasContext.beginPath();
+  canvasContext.font = canvas.width * 0.045 + 'px Arial';
+  canvasContext.textAlign = 'center';
+  canvasContext.textBaseline = 'middle';
+  canvasContext.strokeStyle = '#444';
+  canvasContext.strokeText(
+    'click on screen for fireworks',
+    canvas.width / 2,
+    canvas.height / 2
+  );
+  canvasContext.closePath();
+}
+
 ['load', 'resize'].forEach((event) => {
   window.addEventListener(event, () => {
     canvas.width = innerWidth;
@@ -13,7 +27,7 @@ const context = canvas.getContext('2d');
 
 const particlesNumber = 200;
 const particles = [];
-const PARTICLE_RADIUS = 3;
+const PARTICLE_RADIUS = 2;
 const GRAVITY = 0.02;
 const FRICTION = 0.99;
 const POWER = 8;
@@ -36,6 +50,7 @@ function animate() {
   window.requestAnimationFrame(animate);
   context.fillStyle = 'rgba(0, 0, 0, 0.1)';
   context.fillRect(0, 0, canvas.width, canvas.height); //clear the canvas on every frame refresh then draw.
+  writeInstruction(canvas, context);
 
   particles.forEach((particle, index) => {
     if (particle.alpha > 0) {
