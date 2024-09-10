@@ -22,6 +22,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Click Fireworks',
       filename: 'index.html',
+      template: 'src/template.html',
     }),
   ],
 };
