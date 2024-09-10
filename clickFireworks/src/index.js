@@ -4,12 +4,16 @@ import './styles/main.css';
 const canvas = document.getElementById('drawCanvas');
 const context = canvas.getContext('2d');
 
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+['load', 'resize'].forEach((event) => {
+  window.addEventListener(event, () => {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+  });
+});
 
-const particlesNumber = 20;
+const particlesNumber = 200;
 const particles = [];
-const PARTICLE_RADIUS = 10;
+const PARTICLE_RADIUS = 3;
 const GRAVITY = 0.02;
 const FRICTION = 0.99;
 const POWER = 8;
