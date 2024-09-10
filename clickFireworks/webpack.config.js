@@ -11,6 +11,7 @@ module.exports = {
     filename: '[name][contenthash].js',
     clean: true,
   },
+  devtool: 'inline-source-map',
   devServer: {
     static: {
       directory: path.resolve(__dirname, 'dist'),
