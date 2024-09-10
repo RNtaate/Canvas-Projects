@@ -1,9 +1,10 @@
 class Particle {
-  constructor(x, y, radius) {
+  constructor(x, y, radius, velocity) {
     this.x = x;
     this.y = y;
     this.radius = radius;
-    this.color = 'red';
+    this.color = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+    this.velocity = velocity;
   }
 
   draw(canvasContext) {
@@ -13,7 +14,14 @@ class Particle {
     canvasContext.fill();
   }
 
-  update(canvasContext) {
+  update(canvasContext, gravity, friction) {
+    this.velocity.y += gravity;
+
+    this.velocity.x *= friction;
+    this.velocity.y *= friction;
+
+    this.x += this.velocity.x;
+    this.y += this.velocity.y;
     this.draw(canvasContext);
   }
 }
