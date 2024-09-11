@@ -12,7 +12,7 @@ module.exports = {
     clean: true,
     assetModuleFilename: '[name][ext]',
   },
-  devtools: 'inline-source-map',
+  devtool: 'inline-source-map',
   devServer: {
     static: {
       directory: path.resolve(__dirname, 'dist'),
