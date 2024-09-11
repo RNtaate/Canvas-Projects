@@ -1,5 +1,5 @@
 {
-  "name": "droppedballs",
+  "name": "bouncingplayballs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,9 +8,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "webpack": "^5.94.0",
-    "webpack-cli": "^5.1.4"
-  }
+  "license": "ISC"
 }
