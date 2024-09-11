@@ -9,6 +9,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
+    clean: true,
+    assetModuleFilename: '[name][ext]',
   },
   module: {
     rules: [
@@ -25,6 +27,10 @@ module.exports = {
             presets: [['@babel/preset-env', { targets: 'defaults' }]],
           },
         },
+      },
+      {
+        test: /\.(svg|png|jpe?g|gif)/i,
+        type: 'asset/resource',
       },
     ],
   },
