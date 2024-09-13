@@ -42,9 +42,24 @@ function spawnBalls(canvas, numberOfBalls) {
   }
 }
 
+function writeInstruction() {
+  context.beginPath();
+  context.font = `${canvas.width * (3 / 100)}px Arial`;
+  context.textAlign = 'center';
+  context.textBaseline = 'middle';
+  context.strokeStyle = '#999';
+  context.strokeText(
+    'click screen to start animation',
+    canvas.width / 2,
+    canvas.height / 2
+  );
+  context.closePath();
+}
+
 function animate() {
   requestAnimationFrame(animate);
   context.clearRect(0, 0, canvas.width, canvas.height);
+  writeInstruction();
   ballArray.forEach((ball) => {
     ball.update(canvas, context, GRAVITY, ENERGY_LOSS);
   });
