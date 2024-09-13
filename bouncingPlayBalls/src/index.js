@@ -5,21 +5,22 @@ import './styles/index.css';
 const canvas = document.getElementById('drawCanvas');
 const context = canvas.getContext('2d');
 
-['load', 'resize'].forEach((eventName) => {
-  window.addEventListener(eventName, () => {
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
-  });
-});
-
 let ballArray = [];
 const numberOfBalls = 300;
 const GRAVITY = 0.5;
 const ENERGY_LOSS = 0.98;
 
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+window.addEventListener('resize', () => {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+  init();
+});
+
 canvas.addEventListener('click', () => {
-  ballArray = [];
-  spawnBalls(canvas, numberOfBalls);
+  init();
 });
 
 function spawnBalls(canvas, numberOfBalls) {
@@ -40,6 +41,11 @@ function spawnBalls(canvas, numberOfBalls) {
     });
     ballArray.push(ball);
   }
+}
+
+function init() {
+  ballArray = [];
+  spawnBalls(canvas, numberOfBalls);
 }
 
 function writeInstruction() {
