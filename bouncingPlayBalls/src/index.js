@@ -7,14 +7,14 @@ const context = canvas.getContext('2d');
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-let balls = [];
+let ballArray = [];
 const numberOfBalls = 100;
 const GRAVITY = 0.5;
 const ENERGY_LOSS = 0.98;
 const radius = 30;
 
 canvas.addEventListener('click', () => {
-  balls = [];
+  ballArray = [];
   spawnBalls(canvas, radius, numberOfBalls);
 });
 
@@ -28,14 +28,14 @@ function spawnBalls(canvas, ballRadius, numberOfBalls) {
     let guessedY = Math.floor(Math.random() * (maxY - minY) + minY);
     console.log(guessedX, guessedY);
     const ball = new Ball(guessedX, guessedY, ballRadius, 2);
-    balls.push(ball);
+    ballArray.push(ball);
   }
 }
 
 function animate() {
   requestAnimationFrame(animate);
   context.clearRect(0, 0, canvas.width, canvas.height);
-  balls.forEach((ball) => {
+  ballArray.forEach((ball) => {
     ball.update(canvas, context, GRAVITY, ENERGY_LOSS);
   });
 }
