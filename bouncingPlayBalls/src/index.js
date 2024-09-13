@@ -5,8 +5,12 @@ import './styles/index.css';
 const canvas = document.getElementById('drawCanvas');
 const context = canvas.getContext('2d');
 
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+['load', 'resize'].forEach((eventName) => {
+  window.addEventListener(eventName, () => {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+  });
+});
 
 let ballArray = [];
 const numberOfBalls = 300;
