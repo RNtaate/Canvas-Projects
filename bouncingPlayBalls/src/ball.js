@@ -34,10 +34,11 @@ class Ball {
       this.velocity.y += gravity;
     }
 
-    if (this.x + this.radius + this.velocity.x >= canvas.width) {
+    if (
+      this.x + this.radius + this.velocity.x >= canvas.width ||
+      this.x - this.radius + this.velocity.x <= 0
+    ) {
       this.velocity.x = -this.velocity.x;
-    } else if (this.x - this.radius + this.velocity.x <= 0) {
-      this.velocity.x = Math.abs(this.velocity.x);
     }
     this.y += this.velocity.y;
     this.x += this.velocity.x;
