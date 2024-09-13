@@ -1,3 +1,4 @@
+import Ball from './ball';
 import './styles/index.css';
 
 const canvas = document.getElementById('drawCanvas');
@@ -6,9 +7,12 @@ const context = canvas.getContext('2d');
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-const grad = context.createLinearGradient(0, 0, canvas.width, 0);
-grad.addColorStop(0, 'lightblue');
-grad.addColorStop(1, 'darkblue');
+const ball = new Ball(canvas.width / 2, canvas.height / 2, 30, 2);
 
-context.fillStyle = grad;
-context.fillRect(0, 0, canvas.width, canvas.height);
+function animate() {
+  requestAnimationFrame(animate);
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  ball.update(canvas, context);
+}
+
+animate();
