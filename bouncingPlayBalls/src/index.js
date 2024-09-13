@@ -7,22 +7,29 @@ const context = canvas.getContext('2d');
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-const balls = [];
-const numberOfBalls = 20;
+let balls = [];
+const numberOfBalls = 100;
 const GRAVITY = 0.5;
 const ENERGY_LOSS = 0.98;
 const radius = 30;
 
-for (let i = 1; i <= numberOfBalls; i++) {
-  let minX = radius;
-  let maxX = canvas.width - radius;
-  let minY = radius;
-  let maxY = canvas.height - radius;
-  let guessedX = Math.floor(Math.random() * (maxX - minX) + minX);
-  let guessedY = Math.floor(Math.random() * (maxY - minY) + minY);
-  console.log(guessedX, guessedY);
-  const ball = new Ball(guessedX, guessedY, radius, 2);
-  balls.push(ball);
+canvas.addEventListener('click', () => {
+  balls = [];
+  spawnBalls(canvas, radius, numberOfBalls);
+});
+
+function spawnBalls(canvas, ballRadius, numberOfBalls) {
+  for (let i = 1; i <= numberOfBalls; i++) {
+    let minX = ballRadius;
+    let maxX = canvas.width - ballRadius;
+    let minY = ballRadius;
+    let maxY = canvas.height - ballRadius;
+    let guessedX = Math.floor(Math.random() * (maxX - minX) + minX);
+    let guessedY = Math.floor(Math.random() * (maxY - minY) + minY);
+    console.log(guessedX, guessedY);
+    const ball = new Ball(guessedX, guessedY, ballRadius, 2);
+    balls.push(ball);
+  }
 }
 
 function animate() {
