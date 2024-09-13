@@ -1,10 +1,10 @@
 class Ball {
-  constructor(x, y, radius, dy) {
+  constructor(x, y, radius, velocity) {
     this.x = x;
     this.y = y;
     this.radius = radius;
-    this.color = `hsl(${Math.random() * 360}, 50%, 50%)`;
-    this.dy = dy;
+    this.color = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+    this.velocity = velocity;
   }
 
   draw(canvasContext) {
@@ -26,13 +26,13 @@ class Ball {
   }
 
   update(canvas, canvasContext, gravity, energyLoss) {
-    if (this.y + this.radius + this.dy >= canvas.height) {
-      this.dy = -this.dy;
-      this.dy *= energyLoss;
+    if (this.y + this.radius + this.velocity.y >= canvas.height) {
+      this.velocity.y = -this.velocity.y;
+      this.velocity.y *= energyLoss;
     } else {
-      this.dy += gravity;
+      this.velocity.y += gravity;
     }
-    this.y += this.dy;
+    this.y += this.velocity.y;
     this.draw(canvasContext);
   }
 }
