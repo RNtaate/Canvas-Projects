@@ -8,7 +8,7 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 let ballArray = [];
-const numberOfBalls = 100;
+const numberOfBalls = 200;
 const GRAVITY = 0.5;
 const ENERGY_LOSS = 0.98;
 const radius = 30;
@@ -20,13 +20,15 @@ canvas.addEventListener('click', () => {
 
 function spawnBalls(canvas, ballRadius, numberOfBalls) {
   for (let i = 1; i <= numberOfBalls; i++) {
+    //-----------------------------------------------------------------------------------------
+    // Calculating to ensure no ball is spawned beyond the screen
     let minX = ballRadius;
     let maxX = canvas.width - ballRadius;
     let minY = ballRadius;
     let maxY = canvas.height - ballRadius;
     let guessedX = Math.floor(Math.random() * (maxX - minX) + minX);
     let guessedY = Math.floor(Math.random() * (maxY - minY) + minY);
-    console.log(guessedX, guessedY);
+    //------------------------------------------------------------------------------------------
     const ball = new Ball(guessedX, guessedY, ballRadius, 2);
     ballArray.push(ball);
   }
