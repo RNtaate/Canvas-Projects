@@ -1,4 +1,5 @@
 import Ball from './ball';
+import randomNumberInRangeGenerator from './HelperMethods/randomNumberInRangeGenerator';
 import './styles/index.css';
 
 const canvas = document.getElementById('drawCanvas');
@@ -26,11 +27,11 @@ function spawnBalls(canvas, ballRadius, numberOfBalls) {
     let maxX = canvas.width - ballRadius;
     let minY = ballRadius;
     let maxY = canvas.height - ballRadius;
-    let guessedX = Math.floor(Math.random() * (maxX - minX) + minX);
-    let guessedY = Math.floor(Math.random() * (maxY - minY) + minY);
+    let guessedX = randomNumberInRangeGenerator(minX, maxX);
+    let guessedY = randomNumberInRangeGenerator(minY, maxY);
     //------------------------------------------------------------------------------------------
     const ball = new Ball(guessedX, guessedY, ballRadius, {
-      x: Math.cos(Math.random() * 360),
+      x: randomNumberInRangeGenerator(-2, 2),
       y: 2,
     });
     ballArray.push(ball);
