@@ -29,7 +29,10 @@ function spawnBalls(canvas, ballRadius, numberOfBalls) {
     let guessedX = Math.floor(Math.random() * (maxX - minX) + minX);
     let guessedY = Math.floor(Math.random() * (maxY - minY) + minY);
     //------------------------------------------------------------------------------------------
-    const ball = new Ball(guessedX, guessedY, ballRadius, { x: 1, y: 2 });
+    const ball = new Ball(guessedX, guessedY, ballRadius, {
+      x: Math.cos(Math.random() * 360),
+      y: 2,
+    });
     ballArray.push(ball);
   }
 }

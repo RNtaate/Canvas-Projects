@@ -21,6 +21,7 @@ class Ball {
     canvasContext.fillStyle = this.color;
     canvasContext.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
     canvasContext.fill();
+    canvasContext.strokeStyle = '#222';
     canvasContext.stroke();
     canvasContext.closePath();
   }
@@ -32,7 +33,14 @@ class Ball {
     } else {
       this.velocity.y += gravity;
     }
+
+    if (this.x + this.radius + this.velocity.x >= canvas.width) {
+      this.velocity.x = -this.velocity.x;
+    } else if (this.x - this.radius + this.velocity.x <= 0) {
+      this.velocity.x = Math.abs(this.velocity.x);
+    }
     this.y += this.velocity.y;
+    this.x += this.velocity.x;
     this.draw(canvasContext);
   }
 }
