@@ -42,6 +42,18 @@ class Ball {
     }
     this.y += this.velocity.y;
     this.x += this.velocity.x;
+
+    //adjust ball position if the ball is caught out of bounds as you are resizing the window.
+    if (this.y + this.radius > canvas.height) {
+      this.y = canvas.height - this.radius;
+    }
+    //adjusting for x requires to check both the left and the right seperately.
+    if (this.x + this.radius > canvas.width) {
+      this.x = canvas.width - this.radius;
+    }
+    if (this.x - this.radius < 0) {
+      this.x = this.radius;
+    }
     this.draw(canvasContext);
   }
 }
