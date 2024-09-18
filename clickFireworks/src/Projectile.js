@@ -1,10 +1,11 @@
 class Projectile {
-  constructor(x, y, radius, veloctiy) {
+  constructor(x, y, radius, velocity, targetPoint) {
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.velocity = velocity;
-    this.color = 'red';
+    this.color = 'white';
+    this.targetPoint = targetPoint;
   }
 
   draw(ctx) {
@@ -17,6 +18,7 @@ class Projectile {
 
   update(ctx) {
     this.draw(ctx);
+    this.y += this.velocity.y;
   }
 }
 
