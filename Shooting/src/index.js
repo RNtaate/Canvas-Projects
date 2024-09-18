@@ -56,8 +56,9 @@ function spawnEnemies(canvas, player) {
   }, 1000);
 }
 
+let animationFrameId;
 function animate() {
-  window.requestAnimationFrame(animate);
+  animationFrameId = window.requestAnimationFrame(animate);
   c.fillStyle = 'rgba(0, 0, 0, 0.1)';
   c.fillRect(0, 0, canvas.width, canvas.height);
   player.update(c);
@@ -76,6 +77,15 @@ function animate() {
 
   enemies.forEach((enemy, enemyIndex) => {
     enemy.update(c);
+    const enemyPlayerDist = Math.hypot(player.x - enemy.x, player.y - enemy.y);
+    if (enemyPlayerDist - player.radius - enemy.radius < 1) {
+      //pause the game
+      window.cancelAnimationFrame(animationFrameId);
+      //remove enemy from enemies array
+      setTimeout(() => {
+        enemies.splice(enemyIndex, 1);
+      }, 0);
+    }
 
     //bullets colliding with enemies
     // check all bullets distance from the current enemy, and if one collides with the enemy, remove both the bullet and enemy from their respective arrays.
