@@ -4,10 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    main: path.resolve(__dirname, 'index.js'),
+    main: path.resolve(__dirname, 'src/index.js'),
   },
   output: {
-    path: path.resolve(__diraname, 'dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     clean: true,
     assetModuleFilename: '[name][ext]',
@@ -35,7 +35,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [['@babel/preset-env', { targets: 'default' }]],
+            presets: [['@babel/preset-env', { targets: 'defaults' }]],
           },
         },
       },
