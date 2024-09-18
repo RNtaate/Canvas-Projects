@@ -35,8 +35,12 @@ function spawnBalls(canvas, numberOfBalls) {
     let guessedX = randomNumberInRangeGenerator(minX, maxX);
     let guessedY = randomNumberInRangeGenerator(minY, maxY);
     //------------------------------------------------------------------------------------------
+    let vx = 0;
+    while (vx == 0) {
+      vx = randomNumberInRangeGenerator(-2, 2);
+    }
     const ball = new Ball(guessedX, guessedY, ballRadius, {
-      x: randomNumberInRangeGenerator(-2, 2),
+      x: vx,
       y: randomNumberInRangeGenerator(-2, 2),
     });
     ballArray.push(ball);
