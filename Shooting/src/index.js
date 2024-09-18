@@ -28,16 +28,29 @@ window.addEventListener('click', (event) => {
   bullets.push(bullet);
 });
 
-setInterval(() => {
-  let x = Math.random() * canvas.width;
-  let y = Math.random() * canvas.height;
-  let x2 = canvas.width / 2;
-  let y2 = canvas.height / 2;
-  let angle = Math.atan2(y2 - y, x2 - x);
+function spawnEnemies(canvas, player) {
+  let x;
+  let y;
+  let enemyRadius = 30;
+  setInterval(() => {
+    if (Math.random() < 0.5) {
+      x = Math.random() < 0.5 ? 0 - enemyRadius : canvas.width + enemyRadius;
+      y = Math.random() * canvas.height;
+    } else {
+      x = Math.random() * canvas.width;
+      y = Math.random() < 0.5 ? 0 - enemyRadius : canvas.height + enemyRadius;
+    }
+    let x2 = player.x;
+    let y2 = player.y;
+    let angle = Math.atan2(y2 - y, x2 - x);
 
-  let enemy = new Enemy(x, y, 30, { x: Math.cos(angle), y: Math.sin(angle) });
-  enemies.push(enemy);
-}, 1000);
+    let enemy = new Enemy(x, y, enemyRadius, {
+      x: Math.cos(angle),
+      y: Math.sin(angle),
+    });
+    enemies.push(enemy);
+  }, 1000);
+}
 
 function animate() {
   window.requestAnimationFrame(animate);
@@ -51,4 +64,5 @@ function animate() {
   });
 }
 
+spawnEnemies(canvas, player);
 animate();
