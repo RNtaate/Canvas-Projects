@@ -1,4 +1,5 @@
 import Particle from './Particle';
+import Projectile from './Projectile';
 import './styles/main.css';
 
 const canvas = document.getElementById('drawCanvas');
@@ -27,6 +28,7 @@ function writeInstruction(canvas, canvasContext) {
 
 const particlesNumber = 200;
 const particles = [];
+const projectiles = [];
 const PARTICLE_RADIUS = 2;
 const GRAVITY = 0.02;
 const FRICTION = 0.99;
