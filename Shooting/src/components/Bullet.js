@@ -4,7 +4,7 @@ class Bullet {
     this.y = y;
     this.radius = radius;
     this.velocity = velocity;
-    this.color = 'green';
+    this.color = 'white';
   }
 
   draw(ctx) {

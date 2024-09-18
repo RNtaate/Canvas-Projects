@@ -4,7 +4,7 @@ class Enemy {
     this.y = y;
     this.radius = radius;
     this.velocity = velocity;
-    this.color = 'blue';
+    this.color = `hsl(${Math.random() * 360}, 50%, 50%)`;
   }
 
   draw(ctx) {

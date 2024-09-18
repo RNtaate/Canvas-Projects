@@ -3,7 +3,7 @@ class Player {
     this.x = x;
     this.y = y;
     this.radius = radius;
-    this.color = 'red';
+    this.color = 'white';
   }
 
   draw(ctx) {

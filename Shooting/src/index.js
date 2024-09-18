@@ -1,7 +1,8 @@
 import Player from './components/Player';
 import Bullet from './components/Bullet';
-import Enemy from './components/Enemy';
 import './styles/index.css';
+import Enemy from './components/Enemy';
+import randomNumberGenerator from './HelperMethods/randomNumberGenerator';
 
 const canvas = document.querySelector('#gameCanvas');
 const c = canvas.getContext('2d');
@@ -33,9 +34,10 @@ window.addEventListener('click', (event) => {
 function spawnEnemies(canvas, player) {
   let x;
   let y;
-  let enemyRadius = 30;
+  let enemyRadius;
   setInterval(() => {
     // randomly spawning enemies from outside the window area.
+    enemyRadius = randomNumberGenerator(4, 30);
     if (Math.random() < 0.5) {
       x = Math.random() < 0.5 ? 0 - enemyRadius : canvas.width + enemyRadius;
       y = Math.random() * canvas.height;
@@ -77,6 +79,7 @@ function animate() {
 
   enemies.forEach((enemy, enemyIndex) => {
     enemy.update(c);
+    // enemy and player collision detection.
     const enemyPlayerDist = Math.hypot(player.x - enemy.x, player.y - enemy.y);
     if (enemyPlayerDist - player.radius - enemy.radius < 1) {
       //pause the game
