@@ -1,1 +1,7 @@
-console.log('I think I am finally doing what I am supposed to do.');
+import './styles/index.css';
+
+const canvas = document.querySelector('#gameCanvas');
+const c = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
