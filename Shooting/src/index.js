@@ -35,6 +35,7 @@ function spawnEnemies(canvas, player) {
   let y;
   let enemyRadius = 30;
   setInterval(() => {
+    // randomly spawning enemies from outside the window area.
     if (Math.random() < 0.5) {
       x = Math.random() < 0.5 ? 0 - enemyRadius : canvas.width + enemyRadius;
       y = Math.random() * canvas.height;
@@ -42,6 +43,7 @@ function spawnEnemies(canvas, player) {
       x = Math.random() * canvas.width;
       y = Math.random() < 0.5 ? 0 - enemyRadius : canvas.height + enemyRadius;
     }
+    //-------------------------------------------------------------
     let x2 = player.x;
     let y2 = player.y;
     let angle = Math.atan2(y2 - y, x2 - x);
@@ -56,7 +58,8 @@ function spawnEnemies(canvas, player) {
 
 function animate() {
   window.requestAnimationFrame(animate);
-  c.clearRect(0, 0, canvas.width, canvas.height);
+  c.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  c.fillRect(0, 0, canvas.width, canvas.height);
   player.update(c);
   bullets.forEach((bullet, index) => {
     if (
@@ -70,8 +73,22 @@ function animate() {
       bullet.update(c);
     }
   });
-  enemies.forEach((enemy) => {
+
+  enemies.forEach((enemy, enemyIndex) => {
     enemy.update(c);
+
+    //bullets colliding with enemies
+    // check all bullets distance from the current enemy, and if one collides with the enemy, remove both the bullet and enemy from their respective arrays.
+    bullets.forEach((bullet, bulletIndex) => {
+      const dist = Math.hypot(enemy.x - bullet.x, enemy.y - bullet.y);
+      if (dist - enemy.radius - bullet.radius < 1) {
+        //inorder to avoid flickering on the screen, place the enemy and bullet removal code in a timeout upon collision.
+        setTimeout(() => {
+          enemies.splice(enemyIndex, 1);
+          bullets.splice(bulletIndex, 1);
+        }, 0);
+      }
+    });
   });
 }
 
