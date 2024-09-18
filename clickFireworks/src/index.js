@@ -27,25 +27,46 @@ function writeInstruction(canvas, canvasContext) {
 });
 
 const particlesNumber = 200;
-const particles = [];
+let particles = [];
 const projectiles = [];
 const PARTICLE_RADIUS = 2;
 const GRAVITY = 0.02;
 const FRICTION = 0.99;
 const POWER = 8;
 
-canvas.addEventListener('click', (event) => {
+function createExplosion(
+  xOrigin,
+  yOrigin,
+  radiusPerParticle,
+  particlesNumber,
+  power
+) {
+  let particlesArray = [];
   for (let i = 1; i <= particlesNumber; i++) {
     let angle = ((Math.PI * 2) / particlesNumber) * i;
-    let xDirection = Math.cos(angle) * Math.random() * POWER;
-    let yDirection = Math.sin(angle) * Math.random() * POWER;
-    let particle = new Particle(event.clientX, event.clientY, PARTICLE_RADIUS, {
+    let xDirection = Math.cos(angle) * Math.random() * power;
+    let yDirection = Math.sin(angle) * Math.random() * power;
+    let particle = new Particle(xOrigin, yOrigin, radiusPerParticle, {
       x: xDirection,
       y: yDirection,
     });
-    particles.push(particle);
+    particlesArray.push(particle);
   }
-  console.log(particles.length);
+  return particlesArray;
+}
+
+canvas.addEventListener('click', (event) => {
+  let projectile = new Projectile(
+    event.clientX,
+    canvas.height,
+    3,
+    {
+      x: 0,
+      y: -POWER,
+    },
+    { x: event.clientX, y: event.clientY }
+  );
+  projectiles.push(projectile);
 });
 
 function animate() {
@@ -53,6 +74,22 @@ function animate() {
   context.fillStyle = 'rgba(0, 0, 0, 0.1)';
   context.fillRect(0, 0, canvas.width, canvas.height); //clear the canvas on every frame refresh then draw.
   writeInstruction(canvas, context);
+
+  projectiles.forEach((projectile, index) => {
+    if (projectile.y <= projectile.targetPoint.y) {
+      projectiles.splice(index, 1);
+      let returnedArray = createExplosion(
+        projectile.x,
+        projectile.y,
+        PARTICLE_RADIUS,
+        particlesNumber,
+        POWER
+      );
+      particles = particles.concat(returnedArray);
+    } else {
+      projectile.update(context);
+    }
+  });
 
   particles.forEach((particle, index) => {
     if (particle.alpha > 0) {
