@@ -5,6 +5,7 @@ import './styles/index.css';
 import Enemy from './components/Enemy';
 import randomNumberGenerator from './HelperMethods/randomNumberGenerator';
 
+const scoreSpan = document.querySelector('#scoreSpan');
 const canvas = document.querySelector('#gameCanvas');
 const c = canvas.getContext('2d');
 
@@ -20,6 +21,8 @@ const bulletRadius = 4;
 const bulletPower = 6;
 const particlesNumber = 8;
 const particlesPower = 3;
+let score = 0;
+scoreSpan.textContent = '' + score;
 
 const player = new Player(canvas.width / 2, canvas.height / 2, playerRadius);
 
@@ -130,6 +133,8 @@ function animate() {
             bullets.splice(bulletIndex, 1);
           }, 0);
         }
+        score += 100;
+        scoreSpan.textContent = '' + score;
         createBulletCollisionExplosion(bullet, enemy);
         return;
       }
