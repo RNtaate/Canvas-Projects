@@ -1,5 +1,6 @@
 import Player from './components/Player';
 import Bullet from './components/Bullet';
+import Particle from './components/Particle';
 import './styles/index.css';
 import Enemy from './components/Enemy';
 import randomNumberGenerator from './HelperMethods/randomNumberGenerator';
@@ -12,10 +13,13 @@ canvas.height = window.innerHeight;
 
 const bullets = [];
 const enemies = [];
+const particles = [];
 
 const playerRadius = 20;
 const bulletRadius = 4;
 const bulletPower = 6;
+const particlesNumber = 8;
+const particlesPower = 3;
 
 const player = new Player(canvas.width / 2, canvas.height / 2, playerRadius);
 
@@ -58,12 +62,25 @@ function spawnEnemies(canvas, player) {
   }, 1000);
 }
 
+function createBulletCollisionExplosion(bullet, enemy) {
+  for (let i = 1; i <= particlesNumber; i++) {
+    let angle = ((Math.PI * 2) / particlesNumber) * i;
+    let particle = new Particle(bullet.x, bullet.y, 1, enemy.color, {
+      x: Math.cos(angle) * Math.random() * particlesPower,
+      y: Math.sin(angle) * Math.random() * particlesPower,
+    });
+    particles.push(particle);
+  }
+}
+
 let animationFrameId;
 function animate() {
   animationFrameId = window.requestAnimationFrame(animate);
   c.fillStyle = 'rgba(0, 0, 0, 0.1)';
   c.fillRect(0, 0, canvas.width, canvas.height);
   player.update(c);
+
+  //BULLETS PAINTING ON CANVAS
   bullets.forEach((bullet, index) => {
     if (
       bullet.x + bullet.radius <= 0 ||
@@ -76,7 +93,9 @@ function animate() {
       bullet.update(c);
     }
   });
+  //--------------------------------------------------------------------------------
 
+  //ENEMIES PAINTING ON CANVAS
   enemies.forEach((enemy, enemyIndex) => {
     enemy.update(c);
     // enemy and player collision detection.
@@ -108,10 +127,20 @@ function animate() {
             bullets.splice(bulletIndex, 1);
           }, 0);
         }
-
+        createBulletCollisionExplosion(bullet, enemy);
         return;
       }
     });
+  });
+  //-----------------------------------------------------------------------------------
+
+  //PARTICLES PAINTING ON CANVAS.
+  particles.forEach((particle, particleIndex) => {
+    if (particle.alpha <= 0) {
+      particles.splice(particleIndex, 1);
+    } else {
+      particle.update(c);
+    }
   });
 }
 
