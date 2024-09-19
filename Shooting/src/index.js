@@ -100,6 +100,7 @@ function animate() {
           enemies.splice(enemyIndex, 1);
           bullets.splice(bulletIndex, 1);
         }, 0);
+        return;
       }
     });
   });
