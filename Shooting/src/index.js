@@ -126,14 +126,17 @@ function animate() {
           setTimeout(() => {
             bullets.splice(bulletIndex, 1);
           }, 0);
+
+          score += 4;
         } else {
           //inorder to avoid flickering on the screen, place the enemy and bullet removal code in a timeout upon collision.
           setTimeout(() => {
             enemies.splice(enemyIndex, 1);
             bullets.splice(bulletIndex, 1);
           }, 0);
+
+          score += 10;
         }
-        score += 100;
         scoreSpan.textContent = '' + score;
         createBulletCollisionExplosion(bullet, enemy);
         return;
