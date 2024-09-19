@@ -11,7 +11,22 @@
     ></script>
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
-  <body>
+  <body class="relative">
+    <div
+      class="modal-div absolute top-0 left-0 right-0 bottom-0 bg-slate-950/50 hidden items-center justify-center select-none"
+    >
+      <div
+        class="modal-content-wrapper flex flex-col items-center justify-center bg-white min-w-xs max-w-md w-full text-gray-700 py-3 gap-2"
+      >
+        <p class="text-5xl font-bold" id="scoreBoard">0</p>
+        <span class="text-sm">points</span>
+        <button
+          class="w-[75%] bg-sky-500 text-white py-2 px-3 rounded-3xl text-md"
+        >
+          Start Game
+        </button>
+      </div>
+    </div>
     <div class="text-white text-sm pt-2 pl-2 select-none fixed">
       <span>Score: </span>
       <span id="scoreSpan"></span>

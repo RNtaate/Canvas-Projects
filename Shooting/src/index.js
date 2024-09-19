@@ -26,7 +26,7 @@ scoreSpan.textContent = '' + score;
 
 const player = new Player(canvas.width / 2, canvas.height / 2, playerRadius);
 
-window.addEventListener('click', (event) => {
+canvas.addEventListener('click', (event) => {
   // create bullet
   let x2 = event.clientX;
   let y2 = event.clientY;
