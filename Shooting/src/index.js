@@ -116,7 +116,10 @@ function animate() {
       if (dist - enemy.radius - bullet.radius < 1) {
         // reduce enemy size if enemy is quite big.
         if (enemy.radius - 10 > 5) {
-          enemy.radius -= 10;
+          // apply gsap to facilitate smooth reduction of the enemies' radius
+          gsap.to(enemy, {
+            radius: enemy.radius - 10,
+          });
           setTimeout(() => {
             bullets.splice(bulletIndex, 1);
           }, 0);
