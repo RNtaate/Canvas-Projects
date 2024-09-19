@@ -6,6 +6,9 @@ import Enemy from './components/Enemy';
 import randomNumberGenerator from './HelperMethods/randomNumberGenerator';
 
 const scoreSpan = document.querySelector('#scoreSpan');
+const scoreBoard = document.querySelector('#scoreBoard');
+const scoreBoardModal = document.querySelector('#scoreBoard-modal-div');
+
 const canvas = document.querySelector('#gameCanvas');
 const c = canvas.getContext('2d');
 
@@ -110,6 +113,11 @@ function animate() {
       setTimeout(() => {
         enemies.splice(enemyIndex, 1);
       }, 0);
+
+      //update score board and make it appear
+      scoreBoard.textContent = '' + score;
+      scoreBoardModal.classList.remove('hidden');
+      scoreBoardModal.classList.add('flex');
     }
 
     //bullets colliding with enemies
