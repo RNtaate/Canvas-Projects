@@ -8,6 +8,7 @@ import randomNumberGenerator from './HelperMethods/randomNumberGenerator';
 const scoreSpan = document.querySelector('#scoreSpan');
 const scoreBoard = document.querySelector('#scoreBoard');
 const scoreBoardModal = document.querySelector('#scoreBoard-modal-div');
+const startGamebtn = document.querySelector('#start-game-btn');
 
 const canvas = document.querySelector('#gameCanvas');
 const c = canvas.getContext('2d');
@@ -15,9 +16,9 @@ const c = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const bullets = [];
-const enemies = [];
-const particles = [];
+let bullets = [];
+let enemies = [];
+let particles = [];
 
 const playerRadius = 20;
 const bulletRadius = 4;
@@ -27,7 +28,7 @@ const particlesPower = 3;
 let score = 0;
 scoreSpan.textContent = '' + score;
 
-const player = new Player(canvas.width / 2, canvas.height / 2, playerRadius);
+let player = new Player(canvas.width / 2, canvas.height / 2, playerRadius);
 
 canvas.addEventListener('click', (event) => {
   // create bullet
@@ -41,11 +42,12 @@ canvas.addEventListener('click', (event) => {
   bullets.push(bullet);
 });
 
+let enemyIntervalId;
 function spawnEnemies(canvas, player) {
   let x;
   let y;
   let enemyRadius;
-  setInterval(() => {
+  enemyIntervalId = setInterval(() => {
     // randomly spawning enemies from outside the window area.
     enemyRadius = randomNumberGenerator(4, 30);
     if (Math.random() < 0.5) {
@@ -109,6 +111,8 @@ function animate() {
     if (enemyPlayerDist - player.radius - enemy.radius < 1) {
       //pause the game
       window.cancelAnimationFrame(animationFrameId);
+      //stop spawning enemies
+      clearInterval(enemyIntervalId);
       //remove enemy from enemies array
       setTimeout(() => {
         enemies.splice(enemyIndex, 1);
@@ -162,6 +166,23 @@ function animate() {
     }
   });
 }
+
+function init() {
+  bullets = [];
+  enemies = [];
+  particles = [];
+  player = new Player(canvas.width / 2, canvas.height / 2, playerRadius);
+  score = 0;
+  scoreSpan.textContent = '' + 0;
+  scoreBoardModal.classList.remove('flex');
+  scoreBoardModal.classList.add('hidden');
+  spawnEnemies(canvas, player);
+  animate();
+}
+
+startGamebtn.addEventListener('click', () => {
+  init();
+});
 
 spawnEnemies(canvas, player);
 animate();
