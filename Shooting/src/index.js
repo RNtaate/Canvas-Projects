@@ -95,11 +95,20 @@ function animate() {
     bullets.forEach((bullet, bulletIndex) => {
       const dist = Math.hypot(enemy.x - bullet.x, enemy.y - bullet.y);
       if (dist - enemy.radius - bullet.radius < 1) {
-        //inorder to avoid flickering on the screen, place the enemy and bullet removal code in a timeout upon collision.
-        setTimeout(() => {
-          enemies.splice(enemyIndex, 1);
-          bullets.splice(bulletIndex, 1);
-        }, 0);
+        // reduce enemy size if enemy is quite big.
+        if (enemy.radius - 10 > 5) {
+          enemy.radius -= 10;
+          setTimeout(() => {
+            bullets.splice(bulletIndex, 1);
+          }, 0);
+        } else {
+          //inorder to avoid flickering on the screen, place the enemy and bullet removal code in a timeout upon collision.
+          setTimeout(() => {
+            enemies.splice(enemyIndex, 1);
+            bullets.splice(bulletIndex, 1);
+          }, 0);
+        }
+
         return;
       }
     });
