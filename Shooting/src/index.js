@@ -184,7 +184,7 @@ startGamebtn.addEventListener('click', () => {
   init();
 });
 
-// Handle stopping of the game if user switched tabs. This inturn stops enemies from spawning whilte tabs are switched.
+// Handle stopping of the game if user switched tabs. This inturn stops enemies from spawning while tabs are switched.
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
     clearInterval(enemyIntervalId);
