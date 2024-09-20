@@ -20,7 +20,7 @@ let bullets = [];
 let enemies = [];
 let particles = [];
 
-const playerRadius = 20;
+const playerRadius = 10;
 const bulletRadius = 4;
 const bulletPower = 6;
 const particlesNumber = 8;
