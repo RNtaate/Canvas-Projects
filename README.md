@@ -2,7 +2,7 @@
 
 ## Project Description
 
-> A series of canvas projects I built in having fun while learning about `Canvas` in javascript.
+> A series of canvas projects I built for fun while learning about `Canvas` in javascript.
 
 ## Built With
 
