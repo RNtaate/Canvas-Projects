@@ -25,6 +25,7 @@ const bulletRadius = 4;
 const bulletPower = 6;
 const particlesNumber = 8;
 const particlesPower = 3;
+let gameOver = false;
 let score = 0;
 scoreSpan.textContent = '' + score;
 
@@ -109,6 +110,7 @@ function animate() {
     // enemy and player collision detection.
     const enemyPlayerDist = Math.hypot(player.x - enemy.x, player.y - enemy.y);
     if (enemyPlayerDist - player.radius - enemy.radius < 1) {
+      gameOver = true;
       //pause the game
       window.cancelAnimationFrame(animationFrameId);
       //stop spawning enemies
@@ -173,6 +175,7 @@ function init() {
   particles = [];
   player = new Player(canvas.width / 2, canvas.height / 2, playerRadius);
   score = 0;
+  gameOver = false;
   scoreSpan.textContent = '' + 0;
   scoreBoardModal.classList.remove('flex');
   scoreBoardModal.classList.add('hidden');
@@ -190,10 +193,13 @@ document.addEventListener('visibilitychange', () => {
     clearInterval(enemyIntervalId);
     window.cancelAnimationFrame(animationFrameId);
   } else {
+    if (gameOver) return;
     spawnEnemies(canvas, player);
     animate();
   }
 });
 
-spawnEnemies(canvas, player);
-animate();
+if (!gameOver && enemyIntervalId && animationFrameId) {
+  spawnEnemies(canvas, player);
+  animate();
+}
