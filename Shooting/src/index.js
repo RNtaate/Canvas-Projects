@@ -199,7 +199,7 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-if (!gameOver) {
+if (!gameOver && enemyIntervalId && animationFrameId) {
   spawnEnemies(canvas, player);
   animate();
 }
