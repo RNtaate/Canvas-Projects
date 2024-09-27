@@ -22,6 +22,14 @@
 
 - [Shooting mini game](https://shooting-mini-game.netlify.app)
 
+## Get started on local machine
+
+**_Please check the `Canvas-Projects` README file to find out how to get this project started on your local machine_**.
+
+## 🤝 Contributions
+
+**_Please check the `Canvas-Projects` README file to find out how to contribute to this project_**.
+
 ## ✒️ Authors
 
 👤 **Roy Ntaate**
