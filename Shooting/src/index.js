@@ -198,8 +198,8 @@ document.addEventListener('visibilitychange', () => {
     animate();
   }
 });
-
-if (!gameOver && enemyIntervalId && animationFrameId) {
+// The document.hidden check helps to ensure that no enemies are spawned or animation runs when the project loads as the user is on another tab, otherwise, everything loads successfully.
+if (!gameOver && !document.hidden) {
   spawnEnemies(canvas, player);
   animate();
 }
